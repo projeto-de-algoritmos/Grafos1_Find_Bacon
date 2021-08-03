@@ -4,13 +4,13 @@ import time
 
 
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"
-
+COUNT = 0
 
 def get_page_links(page_title):
     """
     Docs: https://www.mediawiki.org/wiki/API:Links
     """
-    MAX_LINKS_RETURNED = 5
+    MAX_LINKS_RETURNED = 3
     ARTICLE_NAMESPACE = "0"  # https://en.wikipedia.org/wiki/Wikipedia:Namespace
 
     formatted_page_title = page_title.replace(" ", "_")
@@ -36,23 +36,40 @@ def get_page_links(page_title):
     else:
         return page_title, []
 
+def recursive_consume_list(lista, graph, title):
+    if lista:
+        page_title, pages_list = get_page_links(title)
+        graph[page_title] = pages_list
+        last_elem = lista.pop()
+        return recursive_consume_list(lista, graph, last_elem)
+    else:
+        return lista
+
+def recursive_build_graph(count, title, graph):
+    if count == 6:
+        return graph
+    else:
+        count += 1
+        page_title, pages_list = get_page_links(title)
+        graph[page_title] = pages_list
+        if count == 1:
+            recursive_consume_list(pages_list, graph, page_title)
+        return recursive_build_graph(count, page_title, graph)
+
 def build_graph(page_titles, graph):
+    count = 0
     for title in page_titles:
         page_title, pages_list = get_page_links(title)
-
         if page_title not in graph:
             graph[page_title] = pages_list
-            for page in pages_list:
-                if page not in graph:
-                    graph[page] = []
         else:
             graph[page_title].append(pages_list)
+        for page in pages_list:
+            recursive_build_graph(count, page, graph)
+        break
     return graph
 
 if __name__ == "__main__":
-    # kevin_bacon_page_id = get_page_id("Kevin Bacon")
-    start = time.time()
-
     _, kevin_bacon_page_links = get_page_links("Kevin Bacon")
     kevin_bacon_graph = {
         "Kevin Bacon": kevin_bacon_page_links
