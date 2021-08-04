@@ -36,14 +36,37 @@ def get_page_links(page_title):
     else:
         return page_title, []
 
-def recursive_consume_list(lista, graph, title):
+def recursive_preenche_vizinhos(lista, graph, title):
+    print('\n\n')
+    print('*'*30)
+    print(lista, 'xxxxxx', graph, 'xxxxxx', title, 'xxxxxx')
+    print('*'*30)
+
     if lista:
         page_title, pages_list = get_page_links(title)
         graph[page_title] = pages_list
-        last_elem = lista.pop()
-        return recursive_consume_list(lista, graph, last_elem)
+        titulo_prox_iteracao = lista.pop()
+        print(page_title, title, titulo_prox_iteracao)
+        return recursive_preenche_vizinhos(lista, graph, titulo_prox_iteracao)
     else:
         return lista
+
+
+def recursive_consume_list(lista, graph, title, vizinhos=[]):
+    print('#'*30)
+    print(lista, '-----', graph, '-----', title, '-----', vizinhos)
+    print('#'*30)
+    if lista:
+        page_title, pages_list = get_page_links(title)
+        graph[page_title] = pages_list
+        titulo_prox_iteracao = lista.pop()
+        if not lista:
+            recursive_preenche_vizinhos(pages_list, graph, title)
+        else:
+            return recursive_consume_list(lista, graph, titulo_prox_iteracao)
+    else:
+        return lista
+
 
 def build_graph(page_titles, graph):
     for title in page_titles:
