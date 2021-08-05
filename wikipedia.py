@@ -1,6 +1,14 @@
 import requests
 import pprint
 import time
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+def draw_graph(graph):
+    g = nx.convert.from_dict_of_lists(graph)
+    nx.draw(g)
+    plt.savefig("graph.png")
 
 
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"
@@ -60,6 +68,7 @@ if __name__ == "__main__":
     graph.update(nodes_without_connection)
 
     print(f'graph: {graph}\n')
-    
     pretty_print = pprint.PrettyPrinter()
     pretty_print.pprint(graph)
+
+    draw_graph(graph)
