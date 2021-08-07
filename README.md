@@ -34,6 +34,11 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 **Framework**: (caso exista)<br>
 Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
 
+Carregando dados:
+```sh
+python manage.py loaddata kevin_bacon_graph_dump.json
+```
+
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 
