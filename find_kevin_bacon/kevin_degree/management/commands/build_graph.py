@@ -27,11 +27,12 @@ class Command(BaseCommand):
             kevin_bacon_page_links, graph, pages_set, wikipedia_client)
         kevin_bacon_graph.add_nodes_without_connections_to_graph(
             graph, pages_set)
-        graph_integer = kevin_bacon_graph.parse_graph_to_integer(graph)
-
-        start = 0 # 0 represents Kevin Bacon wikipedia page
-        goal = 3
-        path = kevin_bacon_graph.dfs(graph_integer, start, goal)
         Graph.objects.create(json_graph=graph)
 
-        print(f'PATH: {path}')
+        #graph_integer = kevin_bacon_graph.parse_graph_to_integer(graph)
+
+        #start = 0 # 0 represents Kevin Bacon wikipedia page
+        #goal = 3
+        #path = kevin_bacon_graph.dfs(graph_integer, start, goal)
+
+        #print(f'PATH: {path}')
