@@ -45,8 +45,7 @@ def page_search_result(request, page):
             if not path:
                 return HttpResponse(f'Não existe um caminho com no mínimo 6 links a partir da página do Kevin Bacon para a página {page}')
             else:
-                str_path = ' -> '.join([p for p in path])
-                return HttpResponse(str_path)
+                return render(request, 'graph_path.html', {'page': page, 'path': path})
 
 def available_pages(request):
     if request.method == 'GET':
