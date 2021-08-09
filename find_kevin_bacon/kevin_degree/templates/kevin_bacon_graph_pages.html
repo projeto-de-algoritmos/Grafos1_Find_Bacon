@@ -29,17 +29,26 @@
             </div>
         </div>
     </nav>
-    <h1>Pesquisa</h1>
-    <p class="lh-1">Pesquise alguma página da Wikipedia para verificar se é possível através da página do Kevin Bacon a partir de 6 links!</p>
+    <h1>Páginas disponíveis</h1>
+    <p class="lh-1">Todas as páginas disponíveis no grafo do Kevin Bacon</p>
 
-    <div class="container">
-        <form method="POST" class="post-form col-sm-4 mx-auto">{% csrf_token %}
-            {{form.as_p}}
-            <input type="submit" value="buscar" class="save btn btn-success">
-        </form>
-    </div>
-
-
+    <table class="table caption-top">
+      <caption>Lista de páginas</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Página</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for page in pages%}
+          <tr>
+            <th scope="row">{{ forloop.counter}}</th>
+            <td>{{page}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

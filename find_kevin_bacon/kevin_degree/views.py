@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.utils.http import urlencode
 from django.shortcuts import redirect, reverse
 from urllib.parse import quote_plus, quote
@@ -47,3 +47,16 @@ def page_search_result(request, page):
             else:
                 str_path = ' -> '.join([p for p in path])
                 return HttpResponse(str_path)
+
+def available_pages(request):
+    if request.method == 'GET':
+
+        g = Graph.objects.all().first()
+        if not g:
+            return HttpResponse('Carregue um grafo na base de dados')
+        else:
+            graph = g.json_graph
+            pages = list(graph.keys())
+            return render(request, 'kevin_bacon_graph_pages.html', {'pages': pages})
+    else:
+        return HttpResponseNotAllowed('Method not allowed')
