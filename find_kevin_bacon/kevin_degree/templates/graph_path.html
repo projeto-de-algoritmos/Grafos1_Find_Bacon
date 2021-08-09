@@ -30,8 +30,12 @@
         </div>
     </nav>
     <h1>Caminho</h1>
-    <p class="lh-1">O caminho entre a página do <strong>Kevin Bacon</strong> e a página <strong>{{ page }}</strong> é:</p>
 
+    {% if path|length > 7 %}
+      <p class="lh-1">O caminho entre a página do <strong>Kevin Bacon</strong> e a página <strong>{{ page }}</strong> é maior que 6 hyperlinks. Esse caminho possui <strong>{{ path_length_from_kevin_bacon }}</strong> hyperlinks.</p>
+    {% else %}
+      <p class="lh-1">O caminho entre a página do <strong>Kevin Bacon</strong> e a página <strong>{{ page }}</strong> é menor ou igual a 6 hyperlinks. Esse caminho possui <strong>{{ path_length_from_kevin_bacon }}</strong> hyperlinks.</p>
+    {% endif %}
     <table class="table caption-top">
       <caption>Caminho</caption>
       <thead>
@@ -49,6 +53,7 @@
         {% endfor %}
       </tbody>
     </table>
+    
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

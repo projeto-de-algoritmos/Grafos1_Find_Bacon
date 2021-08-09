@@ -43,9 +43,9 @@ def page_search_result(request, page):
             kevin_bacon_graph = KevinBaconGraph()
             path = kevin_bacon_graph.dfs(graph, 'Kevin Bacon', page)
             if not path:
-                return HttpResponse(f'Não existe um caminho com no mínimo 6 links a partir da página do Kevin Bacon para a página {page}')
+                return HttpResponse(f'Não existe um caminho com no máximo 6 links a partir da página do Kevin Bacon para a página {page}')
             else:
-                return render(request, 'graph_path.html', {'page': page, 'path': path})
+                return render(request, 'graph_path.html', {'page': page, 'path': path, 'path_length_from_kevin_bacon': len(path) - 1})
 
 def available_pages(request):
     if request.method == 'GET':
