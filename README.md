@@ -1,7 +1,7 @@
 # Grafos1_Find_Bacon
 
 **Número da Lista**: 2<br>
-**Conteúdo da Disciplina**: DFS<br>
+**Conteúdo da Disciplina**: Grafos 1<br>
 
 ## Alunos
 |Matrícula   |               Aluno                  |
@@ -22,9 +22,6 @@ O Find_Bacon tem o objetivo de verificar se a teoria do [Número de Kevin Bacon]
 ## Instalação 
 **Linguagem**: Python<br>
 **Framework**: Django<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-
-Pré-requisitos para rodar o My Traversal Coach:
 
 É necessário ter o Python (versão 3.8.x), Pip e docker-compose instalados em seu sistema operacional.
 
@@ -43,7 +40,7 @@ $ docker-compose up
 
 **Importante:** O comando `docker-compose up` irá inutilizar o terminal aberto, para se subir o container do banco de dados em bacground, basta executar o comando `docker-compose up -d`
 
-Para facilitar a primeira execução do projeto, foi adicionado o arquivo `dump.zip` com um arquivo `json` para carregar o dump de um grafo com 25 hyperlinks por página. Extraia o arquivo `dump.zip` e execute os seguintes comandos para carregar o grafo no banco de dados.
+Para facilitar a primeira execução do projeto, foi adicionado o arquivo `dump.zip` com um arquivo `json` para carregar o dump de um grafo com 25 hyperlinks por página. Extraia o arquivo `dump.zip` e execute os seguintes comandos para carregar o grafo no banco de dados. Na seção "Outros" existe outra forma de carregar um grafo sem a necessidade de extrair um arquivo `.zip`
 Carregando dados:
 ```sh
 $ cd find_kevin_bacon
@@ -59,6 +56,7 @@ $ python manage.py migrate
 
 Suba o servidor Django com o comando abaixo:
 ```sh
+$ cd find_kevin_bacon
 $ python manage.py runserver
 ```
 
@@ -69,20 +67,13 @@ $ python manage.py runserver
 3. Para realizar a busca de uma página, clique em **Início** ou volte para a url `http://localhost:8000` e insira a página de busca desejada. Após isso, clique em buscar.
 4. Com isso, deverá ser exibido o caminho do grafo partindo da página do Kevin Bacon
 
-Rodando servidor
-```sh
-$ cd find_kevin_bacon
-$ python manage.py runserver
-```
-
-Migrando banco de dados
-```sh
-$ cd find_kevin_bacon
-$ python manage.py migrate
-```
 
 ## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+Caso não queira utilizar um grafo pré-montado, existe um comando disponível para a criação dele no código. Para executá-la é necessário rodar o comando:
+```sh
+$ cd find_kevin_bacon
+$ python manage.py build_graph ---qty-links=<quantidade de links por página>
+```
 
 
 
